@@ -1,0 +1,43 @@
+<html>
+<head>
+    <script>
+        function upload() {
+            var files = document.getElementById("foto").files;
+            
+            if (files.length == 0) {
+                return;
+            }
+
+            var file = files[0];
+            var filename = files[0].name;
+
+            var fileReader = new FileReader();
+
+            fileReader.onloadend = function (fileLoadedEvent) {
+                var fileData = fileLoadedEvent.target.result;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/upload/' + filename,
+                    data: fileData,
+                    dataType: "text",
+                    contentType: "text/plain",
+                    complete: function () {
+                        $('#nuevoCuadro').submit();
+                    }
+                });
+            }
+
+            fileReader.readAsDataURL(file);
+        }
+    </script>
+</head>
+
+<body>
+    <form action="/nuevo_cuadro" method="post" accept-charset="utf-8" id="nuevoCuadro">
+        <input id="foto" type="file" name="foto" />
+        <button type="button" onclick="upload();">Upload</button>
+    </form>
+</body>
+
+</html>
