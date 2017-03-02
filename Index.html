@@ -7,36 +7,47 @@
     <script type="text/javascript" src="htmlHelpers.js"></script>
     <script>
         var interval;
-        var game = new gameOfLife(30, 40);
 
         function start() {
+            var game = new gameOfLife(getRows(), getCols());
+
             interval = setInterval(function () {
                 $("#output").html(convert2dArrayToHtmlTable(game.getCurrentGeneration()));
                 game.generateNextGeneration();
             }, 500);
         }
 
-        function convert2dArrayToHtmlTable(grid) {
-            var result = "<table>";
-            for (var r = 0; r < grid.length; r++) {
-                result += "<tr>";
-                for (var c = 0; c < grid[r].length; c++) {
-                    result += "<td>" + (grid[r][c] === true ? "X" : " ") + "</td>";
-                }
-                result += "</tr>\n";
-            }
-            return result + "</table>";
-        }
-
         function stop() {
             clearInterval(interval);
+        }
+
+        function getRows() {
+            var defaultRows = 30;
+            var rows = parseInt($("#txtRows").val());
+            return (isNaN(rows) ? defaultRows : rows);
+        }
+
+        function getCols() {
+            var defaultCols = 50;
+            var cols = parseInt($("#txtCols").val());
+            return (isNaN(cols) ? defaultCols : cols);
         }
     </script>
 </head>
 
 <body>
-    <button type="button" onclick="start();">Start</button>
-    <button type="button" onclick="stop();">Stop</button>
+    <div>
+        <label>Rows:</label>
+        <input type="text" id="txtRows" />
+    </div>
+    <div>
+        <label>Cols:</label>
+        <input type="text" id="txtCols" />
+    </div>
+    <div>
+        <button type="button" onclick="start();">Start</button>
+        <button type="button" onclick="stop();">Stop</button>
+    </div>
     <div id="output"></div>
 </body>
 
