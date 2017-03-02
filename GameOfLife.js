@@ -3,14 +3,12 @@ function gameOfLife(rows, columns) {
 
     function _initializeGrid(rows, columns) {
         var grid = [];
-
         for (r = 0; r < rows; r++) {
             grid[r] = [];
             for (c = 0; c < columns; c++) {
                 grid[r][c] = _getRandonBoolean();
             }
         }
-
         return grid;
     }
 
@@ -18,7 +16,7 @@ function gameOfLife(rows, columns) {
         return Math.random() >= 0.5;
     }
 
-    function _getActiveCellCountSurroundingg(row, column) {
+    function _getActiveCellCountSurrounding(row, column) {
         return 0;
     }
 
@@ -26,7 +24,7 @@ function gameOfLife(rows, columns) {
         if (isCurrentlyAlive && surroundingCellCount < 2) return false;
         if (isCurrentlyAlive && surroundingCellCount === 2 || surroundingCellCount === 3 )  return true;
         if (isCurrentlyAlive && surroundingCellCount > 3 )  return false;
-        if (isCurrentlyAlive == false && urroundingCellCount === 3) return true;
+        if (isCurrentlyAlive == false && surroundingCellCount === 3) return true;
         return false;
     }
 
@@ -34,14 +32,13 @@ function gameOfLife(rows, columns) {
         var nextGeneration = [];
 
         for (r = 0; r < rows; r++) {
-            _currentGeneration[r] = [];
+            nextGeneration[r] = [];
             for (c = 0; c < columns; c++) {
-                var isCurrentlyAlive = _currentGeneration(r, c)
+                var isCurrentlyAlive = _currentGeneration[r][c];
                 var surroundingCellCount = _getActiveCellCountSurrounding(r, c);
-                nextGeneration[r,c] = isAliveNextGeneration(isCurrentlyAlive, surroundingCellCount);
+                nextGeneration[r][c] = _isAliveNextGeneration(isCurrentlyAlive, surroundingCellCount);
             }
         }
-
         _currentGeneration = nextGeneration;
     }
 

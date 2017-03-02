@@ -1,24 +1,37 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="style.css">
     <script src="jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="gameOfLife.js"></script>
-    <link rel="stylesheet" href="style.css">
     <script>
         var game = new gameOfLife(20, 20);
+        var keepGeneratingGenerations = true;
 
-        function showCurrentGeneration() {
-            $("#output").html(game.getCurrentGenerationAsHtmlTable());
+        function start() {
+            keepGeneratingGenerations = true;
+
+            setInterval(function () {
+                $("#output").html(game.getCurrentGenerationAsHtmlTable());
+                game.generateNextGeneration();
+
+                if (keepGeneratingGenerations == false) {
+                    clearInterval();
+                }
+            }, 500);
+
+        }
+
+        function stop() {
+            keepGeneratingGenerations = false;
         }
     </script>
 </head>
 
 <body>
-
-    <button type="button" onclick="showCurrentGeneration();">Show</button>
-
-    <div id="output">
-    </div>
+    <button type="button" onclick="start();">Start</button>
+    <button type="button" onclick="stop();">Stop</button>
+    <div id="output"></div>
 </body>
 
 </html>
