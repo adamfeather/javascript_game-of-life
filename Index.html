@@ -5,25 +5,19 @@
     <script src="jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="gameOfLife.js"></script>
     <script>
+        var interval;
         var game = new gameOfLife(20, 20);
-        var keepGeneratingGenerations = true;
 
         function start() {
-            keepGeneratingGenerations = true;
-
-            setInterval(function () {
+            interval = setInterval(function () {
                 $("#output").html(game.getCurrentGenerationAsHtmlTable());
                 game.generateNextGeneration();
-
-                if (keepGeneratingGenerations == false) {
-                    clearInterval();
-                }
             }, 500);
 
         }
 
         function stop() {
-            keepGeneratingGenerations = false;
+            clearInterval(interval);
         }
     </script>
 </head>
