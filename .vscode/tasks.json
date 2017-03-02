@@ -1,8 +1,8 @@
 {
     "version": "0.1.0",
     "command": "Chrome",
-    "isShellCommand": true,
-    "args": ["index.html"],
+    "isShellCommand": false,
+    "args": ["Index.html"],
      "windows": {
         "command": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
     },
