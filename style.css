@@ -1,2 +1,15 @@
+* {font-size:0.9em;}
+
 html { font-family: Tahoma, sans-serif; }
-table td { font-size: 8pt; }
+
+
+label { 
+    width: 3em; 
+    text-align: right; 
+    float:left; 
+    margin-right: 0.6em; 
+}
+
+input[type=text] { width: 3em;}
+
+div {margin: 0.5em;}
