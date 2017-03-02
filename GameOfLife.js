@@ -18,12 +18,39 @@ function gameOfLife(rows, columns) {
         return Math.random() >= 0.5;
     }
 
+    function _getActiveCellCountSurroundingg(row, column) {
+        return 0;
+    }
+
+    function _isAliveNextGeneration(isCurrentlyAlive, surroundingCellCount){
+        if (isCurrentlyAlive && surroundingCellCount < 2) return false;
+        if (isCurrentlyAlive && surroundingCellCount === 2 || surroundingCellCount === 3 )  return true;
+        if (isCurrentlyAlive && surroundingCellCount > 3 )  return false;
+        if (isCurrentlyAlive == false && urroundingCellCount === 3) return true;
+        return false;
+    }
+
+    this.generateNextGeneration = function () {
+        var nextGeneration = [];
+
+        for (r = 0; r < rows; r++) {
+            _currentGeneration[r] = [];
+            for (c = 0; c < columns; c++) {
+                var isCurrentlyAlive = _currentGeneration(r, c)
+                var surroundingCellCount = _getActiveCellCountSurrounding(r, c);
+                nextGeneration[r,c] = isAliveNextGeneration(isCurrentlyAlive, surroundingCellCount);
+            }
+        }
+
+        _currentGeneration = nextGeneration;
+    }
+
     this.getCurrentGenerationAsHtmlTable = function () {
         var result = "<table>";
         for (var r = 0; r < rows; r++) {
             result += "<tr>";
             for (var c = 0; c < columns; c++) {
-                result += "<td>" + (_currentGeneration[r][c] === true ? "X" : "-") + "</td>";
+                result += "<td>" + (_currentGeneration[r][c] === true ? "X" : " ") + "</td>";
             }
             result += "</tr>\n";
         }
