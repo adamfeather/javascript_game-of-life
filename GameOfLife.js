@@ -1,23 +1,34 @@
-var gridWidth = 20;
-var gridHeight = 10;
+function gameOfLife(rows, columns) {
+    var _currentGeneration = _initializeGrid(rows, columns);
 
-var grid = initializeGrid(gridWidth, gridHeight);
+    function _initializeGrid(rows, columns) {
+        var grid = [];
 
-grid.forEach(currentItem => {
-    currentItem.forEach(currentItem => {
-        console.log(currentItem);
-    });
-});
-
-function initializeGrid(width, height) {
-    var grid = [];
-
-    for (h = 0; h < height; h++) {
-        grid[h] = [];
-        for (w = 0; w < width; w++) {
-            grid[h][w] = h + "," + w;
+        for (r = 0; r < rows; r++) {
+            grid[r] = [];
+            for (c = 0; c < columns; c++) {
+                grid[r][c] = _getRandonBoolean();
+            }
         }
+
+        return grid;
     }
 
-    return grid;
+    function _getRandonBoolean() {
+        return Math.random() >= 0.5;
+    }
+
+    this.getCurrentGenerationAsHtmlTable = function () {
+        var result = "<table>";
+        for (var r = 0; r < rows; r++) {
+            result += "<tr>";
+            for (var c = 0; c < columns; c++) {
+                result += "<td>" + (_currentGeneration[r][c] === true ? "X" : "-") + "</td>";
+            }
+            result += "</tr>\n";
+        }
+        result += "</table>";
+
+        return result;
+    }
 }
