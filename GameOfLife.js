@@ -17,13 +17,23 @@ function gameOfLife(rows, columns) {
     }
 
     function _getActiveCellCountSurrounding(row, column) {
-        return 0;
+        var surroundingActiveCellCount = 0;
+        for (var y = -1; y <= 1; y++) {
+            for (var x = -1; x <= 1; x++) {
+                var isSelf = (y === 0 && y === 0);
+                var isOutOfYBounds = ((row + y) < 0 || (row + y) >= rows);
+                var isOutOfXBounds = ((column + x) < 0 || (column + x) >= columns);
+                if (isSelf || isOutOfYBounds || isOutOfXBounds) continue;
+                surroundingActiveCellCount += (_currentGeneration[row + y][column + x] ? 1 : 0);
+            }
+        }
+        return surroundingActiveCellCount;
     }
 
-    function _isAliveNextGeneration(isCurrentlyAlive, surroundingCellCount){
+    function _isAliveNextGeneration(isCurrentlyAlive, surroundingCellCount) {
         if (isCurrentlyAlive && surroundingCellCount < 2) return false;
-        if (isCurrentlyAlive && surroundingCellCount === 2 || surroundingCellCount === 3 )  return true;
-        if (isCurrentlyAlive && surroundingCellCount > 3 )  return false;
+        if (isCurrentlyAlive && surroundingCellCount === 2 || surroundingCellCount === 3) return true;
+        if (isCurrentlyAlive && surroundingCellCount > 3) return false;
         if (isCurrentlyAlive == false && surroundingCellCount === 3) return true;
         return false;
     }

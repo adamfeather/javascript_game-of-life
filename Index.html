@@ -6,14 +6,13 @@
     <script type="text/javascript" src="gameOfLife.js"></script>
     <script>
         var interval;
-        var game = new gameOfLife(20, 20);
+        var game = new gameOfLife(30, 40);
 
         function start() {
             interval = setInterval(function () {
                 $("#output").html(game.getCurrentGenerationAsHtmlTable());
                 game.generateNextGeneration();
             }, 500);
-
         }
 
         function stop() {
