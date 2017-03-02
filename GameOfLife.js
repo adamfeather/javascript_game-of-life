@@ -52,17 +52,7 @@ function gameOfLife(rows, columns) {
         _currentGeneration = nextGeneration;
     }
 
-    this.getCurrentGenerationAsHtmlTable = function () {
-        var result = "<table>";
-        for (var r = 0; r < rows; r++) {
-            result += "<tr>";
-            for (var c = 0; c < columns; c++) {
-                result += "<td>" + (_currentGeneration[r][c] === true ? "X" : " ") + "</td>";
-            }
-            result += "</tr>\n";
-        }
-        result += "</table>";
-
-        return result;
+    this.getCurrentGeneration = function(){
+        return _currentGeneration;
     }
 }
