@@ -1,2 +1,2 @@
-# javascript_game-of-life
+# Javascript : Game of Life
 Learning Javascript with Game of Life
